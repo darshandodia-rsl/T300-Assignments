@@ -1,0 +1,10 @@
+{
+  "name": "organization-management",
+  "version": "1.0.0",
+  "description": "Organization Management system built with TypeScript (OOP)",
+  "type": "module",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  }
+}
