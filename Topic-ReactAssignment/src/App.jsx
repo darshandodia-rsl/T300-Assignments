@@ -4,6 +4,7 @@ import FilterButtonRow from './components/FilterButtonRow/FilterButtonRow'
 import TaskCard from './components/TaskCard/TaskCard'
 import './App.css'
 
+// initial mock tasks
 const INITIAL_TASKS = [
   { id: 1, text: 'Learn ReactJS basics', completed: true },
   { id: 2, text: 'Practice ReactJS', completed: false },
@@ -19,6 +20,7 @@ function App() {
 
   const dialogRef = useRef(null)
 
+  // add a new task to the list
   const handleAddTask = (text) => {
     const newTask = {
       id: Date.now(),
@@ -28,6 +30,7 @@ function App() {
     setTasks([...tasks, newTask])
   }
 
+  // toggle task completion status
   const handleToggleTask = (id) => {
     setTasks(
       tasks.map((task) => {
@@ -36,11 +39,13 @@ function App() {
     )
   }
 
+  // open delete confirmation modal
   const handleDeleteTask = (id) => {
     setTaskToDelete(id)
     dialogRef.current?.showModal()
   }
 
+  // confirm task deletion
   const confirmDeleteTask = () => {
     if (taskToDelete !== null) {
       setTasks(tasks.filter((task) => task.id !== taskToDelete))
@@ -49,11 +54,13 @@ function App() {
     dialogRef.current?.close()
   }
 
+  // cancel deletion and close modal
   const cancelDeleteTask = () => {
     setTaskToDelete(null)
     dialogRef.current?.close()
   }
 
+  // update task text
   const handleEditTask = (id, newText) => {
     console.log('Editing task with id:', id, 'New text:', newText)
     setTasks(
@@ -63,6 +70,7 @@ function App() {
     )
   }
 
+  // filter tasks by status and sort completed tasks to top
   const filteredTasks = tasks
     .filter((task) => {
       if (filter === 'Done') return task.completed
@@ -101,6 +109,7 @@ function App() {
         <h2 className="section-unavailable">No todo is available</h2>
       )}
 
+      {/* confirmation modal for task deletion */}
       <dialog
         ref={dialogRef}
         className="confirm-dialog"

@@ -4,6 +4,7 @@ import "./AddTaskCard.css";
 function AddTaskCard({ onAddTask }) {
   const [taskText, setTaskText] = useState("");
 
+  // submit new task and clear input
   const handleSubmit = (e) => {
     e.preventDefault();
     if (onAddTask) {

@@ -1,6 +1,7 @@
 import "./FilterButtonRow.css";
 
 function FilterButtonRow({ activeFilter = "All", onFilterChange }) {
+  // filter tabs
   const filters = ["All", "Done", "Todo"];
 
   return (

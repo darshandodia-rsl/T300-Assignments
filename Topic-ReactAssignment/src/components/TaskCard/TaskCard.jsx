@@ -8,6 +8,7 @@ function TaskCard({ text, completed = false, onToggle, onEdit, onDelete }) {
     return (
         <div className="task-card">
             {isEditing ? (
+                /* inline editing mode */
                 <div className="task-edit-group">
                     <input
                         type="text"
@@ -16,6 +17,7 @@ function TaskCard({ text, completed = false, onToggle, onEdit, onDelete }) {
                         className="task-text"
                         onChange={(e) => setEditedText(e.target.value)}
                         onKeyDown={(e) => {
+                            // save on Enter key
                             if (e.key === "Enter") {
                                 onEdit(e.target.value);
                                 setIsEditing(false);
@@ -46,6 +48,7 @@ function TaskCard({ text, completed = false, onToggle, onEdit, onDelete }) {
                     </button>
                 </div>
             ) : (
+                /* normal view mode */
                 <>
                     <span
                         className={`task-text ${completed ? "completed" : ""}`}
@@ -67,6 +70,7 @@ function TaskCard({ text, completed = false, onToggle, onEdit, onDelete }) {
                             )}
                         </button>
 
+                        {/* show delete when completed, edit when pending */}
                         {completed ? (
                             <button
                                 type="button"
