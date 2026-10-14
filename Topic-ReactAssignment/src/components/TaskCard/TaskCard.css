@@ -1,0 +1,82 @@
+.task-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  background-color: #ffffff;
+  padding: 18px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.task-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: #343a40;
+}
+
+.task-text.completed {
+  color: #e14554;
+  text-decoration: line-through;
+}
+
+.task-actions {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex-shrink: 0;
+}
+
+.task-edit-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  line-height: 1;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+}
+
+.action-btn:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.action-btn:active {
+  transform: scale(0.95);
+}
+
+.icon-checked {
+  color: #23ae63;
+}
+
+.icon-unchecked {
+  color: #8d8f93;
+}
+
+.icon-edit {
+  color: #ffb938;
+}
+
+.icon-delete {
+  color: #e23344;
+}
+
+.icon-save {
+  color: #008115;
+}
+
+.icon-cancel {
+  color: #e23344;
+}

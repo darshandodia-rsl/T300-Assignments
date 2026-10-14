@@ -1,0 +1,62 @@
+.todo-input-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 24px;
+  background-color: #ffffff;
+}
+
+.todo-input-group {
+  display: flex;
+  align-items: stretch;
+  height: 44px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 18px;
+  background-color: #ffffff;
+}
+
+.todo-input-icon {
+  background-color: #0198ac;
+  color: #ffffff;
+  width: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+}
+
+.todo-input-field {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 0 16px;
+  font-size: 15px;
+  color: #495057;
+  font-family: inherit;
+  background-color: transparent;
+}
+
+.todo-input-field::placeholder {
+  color: #6c757d;
+  font-weight: 400;
+}
+
+.add-button {
+  width: 100%;
+  height: 44px;
+  background-color: #0198ac;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: inherit;
+  transition: background-color 0.2s ease;
+}
+
+.add-button:hover {
+  background-color: #00889a;
+}
