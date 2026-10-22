@@ -1,5 +1,6 @@
-import { useActionState, useContext, useEffect } from 'react'
+import { useActionState, useContext, useEffect, useRef } from 'react'
 import { UserContext } from '../context/UserContext'
+import FormInput from './FormInput'
 import SubmitButton from './SubmitButton'
 
 const initialState = { status: 'idle', errors: {}, user: null }
@@ -29,6 +30,16 @@ async function registerAction(prevState, formData) {
 export default function RegistrationForm() {
   const [state, formAction] = useActionState(registerAction, initialState)
   const { setUser } = useContext(UserContext)
+  const nameRef = useRef(null)
+  const emailRef = useRef(null)
+  const passwordRef = useRef(null)
+
+  // after a failed validation, put the cursor in the first field with an error
+  useEffect(() => {
+    if (state.errors.name) nameRef.current.focus()
+    else if (state.errors.email) emailRef.current.focus()
+    else if (state.errors.password) passwordRef.current.focus()
+  }, [state])
 
   // when registration succeeds, save the user in context
   useEffect(() => {
@@ -41,25 +52,15 @@ export default function RegistrationForm() {
     <form action={formAction} className="form">
       <h2>Register</h2>
 
-      <label>
-        Name
-        <input type="text" name="name" />
-        {state.errors.name && <span className="field-error">{state.errors.name}</span>}
-      </label>
-
-      <label>
-        Email
-        <input type="text" name="email" />
-        {state.errors.email && <span className="field-error">{state.errors.email}</span>}
-      </label>
-
-      <label>
-        Password
-        <input type="password" name="password" />
-        {state.errors.password && (
-          <span className="field-error">{state.errors.password}</span>
-        )}
-      </label>
+      <FormInput label="Name" type="text" name="name" ref={nameRef} error={state.errors.name} />
+      <FormInput label="Email" type="text" name="email" ref={emailRef} error={state.errors.email} />
+      <FormInput
+        label="Password"
+        type="password"
+        name="password"
+        ref={passwordRef}
+        error={state.errors.password}
+      />
 
       <SubmitButton />
 

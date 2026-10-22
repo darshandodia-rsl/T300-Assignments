@@ -1,12 +1,6 @@
-// prices are in rupees, formatted like ₹6,499
-const formatPrice = (price) =>
-  new Intl.NumberFormat('en-IN', {
-    style: 'currency',
-    currency: 'INR',
-    maximumFractionDigits: 0,
-  }).format(price)
+import { formatPrice } from '../formatPrice'
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, onSelect }) {
   return (
     <div className="card">
       <img src={product.image} alt={product.name} />
@@ -15,6 +9,7 @@ export default function ProductCard({ product }) {
         <h3>{product.name}</h3>
         <p className="description">{product.description}</p>
         <p className="price">{formatPrice(product.price)}</p>
+        <button onClick={() => onSelect(product)}>View details</button>
       </div>
     </div>
   )

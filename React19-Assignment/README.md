@@ -76,3 +76,60 @@ I wrote the tags straight inside `App`'s JSX:
 ```
 
 React 19 moves them into `<head>` by itself, so I don't need react-helmet.
+
+# Task 2
+
+## Product details
+
+Each product card has a "View details" button. `ProductSection` keeps the clicked product in state (`selectedProduct`) and shows `ProductDetails` (name, price, description, image) instead of the list. "Back to products" sets it back to `null`.
+
+## Add to Cart with useOptimistic()
+
+The cart count lives in `ProductSection` (`cartCount`). `AddToCart` does:
+
+```jsx
+const [optimisticCount, addOptimisticItem] = useOptimistic(cartCount, (count, amount) => count + amount)
+```
+
+The button is inside a `<form action={addAction}>`. In `addAction`:
+
+1. `addOptimisticItem(1)` - the count goes up immediately and "(updating...)" is shown.
+2. `await addToCart()` - fake request in `api/cart.js`, takes 1.5 seconds and fails randomly about 1 time in 3.
+3. If it works, the real `cartCount` is increased, so the final number is the same as the optimistic one.
+4. If it fails, I don't change `cartCount`. When the action ends React drops the optimistic value, so the count goes back to the real number, and an error message is shown.
+
+## Ref as a prop
+
+`FormInput` is a reusable input with a label and an error message. It takes `ref` like any other prop, no `forwardRef()`:
+
+```jsx
+export default function FormInput({ label, error, ref, ...props }) {
+  return (
+    <label>
+      {label}
+      <input ref={ref} {...props} />
+      ...
+```
+
+`RegistrationForm` gives the three inputs refs and, after a failed validation, calls `.focus()` on the first input that has an error.
+
+## Ref cleanup
+
+In `ProductDetails` the details `<div>` has a callback ref (`handleSectionRef`). When the div is added, it adds a `keydown` listener to the document so pressing Escape goes back to the list. The function returns a cleanup that removes the listener. React 19 calls that cleanup when the div is removed (or when the ref function changes), so the listener doesn't stay after leaving the details page.
+
+## Server and Client Components (conceptual)
+
+This app uses Vite, so everything here is a Client Component. Real Server Components need a framework like Next.js. This is how I would split it:
+
+- **Server Components:** the product list page and `ProductDetails`. They only show data (name, price, description, image) and don't need state or event handlers. As Server Components they can read the product from the database directly, the code for them is not sent to the browser, and the page can load faster.
+- **Client Components:** `AddToCart` (it needs `useOptimistic`, `useState` and a form action that updates the cart), `RegistrationForm` (state, `useActionState`, refs) and the context provider. Anything with state, effects, refs or browser events has to be a Client Component (`'use client'`).
+- **Together:** the Server Component fetches the product and renders the page, and inside it puts the Client Component `<AddToCart productId={product.id} />`. The server passes plain props (like the id) to the client component. When the user clicks, the client component updates the UI right away and calls the server (for example a Server Action) to save the cart.
+
+## React Compiler
+
+React Compiler is a build tool that reads the components and automatically memoizes values and functions, like adding `useMemo`, `useCallback` and `React.memo` for you. So React skips re-rendering parts that didn't change, and I don't have to write the memoization by hand. I did not install it in this project, this is only an explanation.
+
+Examples from this app:
+
+- In `ProductDetails`, `handleSectionRef` is a new function on every render, so React runs its cleanup and re-attaches the Escape listener each time the component renders. The compiler would keep the same function between renders (as long as `onBack` is the same), so the listener is not removed and added again for no reason. Without the compiler I would wrap it in `useCallback`.
+- In `ProductList`, the `ProductCard`s are re-rendered when the parent re-renders, even if the product didn't change (for example when `cartCount` changes in `ProductSection`). The compiler can skip the cards whose props are the same.
