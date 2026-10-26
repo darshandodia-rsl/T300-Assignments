@@ -1,0 +1,92 @@
+[
+  {
+    "id": "1",
+    "name": "Dashboard Revamp",
+    "description": "Redesign the internal dashboard with a faster, cleaner layout.",
+    "status": "active",
+    "tags": ["nextjs", "dashboard", "ui"],
+    "team": [
+      { "name": "Darshan Dodia", "role": "Tech Lead" },
+      { "name": "Kavin Shah", "role": "Frontend Engineer" },
+      { "name": "Sameer Joshi", "role": "Designer" }
+    ],
+    "tasks": [
+      { "title": "Design sidebar navigation", "done": true },
+      { "title": "Build stats widgets", "done": false },
+      { "title": "Add streaming recent activity", "done": false }
+    ],
+    "activity": [
+      "Darshan merged the sidebar pull request",
+      "Sameer uploaded new widget mockups",
+      "Kavin started work on stats widgets"
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Next.js Migration",
+    "description": "Move the legacy React app to the Next.js App Router.",
+    "status": "active",
+    "tags": ["nextjs", "migration"],
+    "team": [
+      { "name": "Sumeet Patil", "role": "Engineering Manager" },
+      { "name": "Pranav Desai", "role": "Frontend Engineer" }
+    ],
+    "tasks": [
+      { "title": "Audit existing routes", "done": true },
+      { "title": "Convert pages to Server Components", "done": false },
+      { "title": "Set up error boundaries", "done": false }
+    ],
+    "activity": [
+      "Pranav converted the settings pages",
+      "Sumeet approved the migration plan"
+    ]
+  },
+  {
+    "id": "3",
+    "name": "Customer Portal",
+    "description": "Self-service portal for customers to track their orders.",
+    "status": "completed",
+    "tags": ["portal", "customers"],
+    "team": [
+      { "name": "Mayank Verma", "role": "Product Manager" },
+      { "name": "Geetesh Nair", "role": "Backend Engineer" }
+    ],
+    "tasks": [
+      { "title": "Order tracking page", "done": true },
+      { "title": "Email notifications", "done": true }
+    ],
+    "activity": [
+      "Geetesh shipped the notification service",
+      "Mayank signed off the final release"
+    ]
+  },
+  {
+    "id": "4",
+    "name": "Analytics Dashboard",
+    "description": "Charts and reports for monthly project health.",
+    "status": "completed",
+    "tags": ["dashboard", "analytics"],
+    "team": [
+      { "name": "Nachiket Kulkarni", "role": "Data Analyst" },
+      { "name": "Shrirang Bhosale", "role": "Frontend Engineer" }
+    ],
+    "tasks": [
+      { "title": "Monthly health chart", "done": true },
+      { "title": "Export to CSV", "done": true }
+    ],
+    "activity": ["Shrirang fixed the CSV export bug", "Nachiket published the first report"]
+  },
+  {
+    "id": "5",
+    "name": "Mobile App Planning",
+    "description": "Research and planning for a companion mobile app.",
+    "status": "planned",
+    "tags": ["mobile", "research"],
+    "team": [{ "name": "Kavin Shah", "role": "Product Designer" }],
+    "tasks": [
+      { "title": "User interviews", "done": false },
+      { "title": "Competitor analysis", "done": false }
+    ],
+    "activity": ["Kavin scheduled the first user interviews"]
+  }
+]
